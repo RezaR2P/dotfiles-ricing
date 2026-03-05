@@ -1,0 +1,109 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 6,
+    "margin-top": 8,
+    "margin-bottom": 0,
+    "fixed-center": true,
+
+    "modules-left": [],
+    "modules-center": [
+        "hyprland/workspaces",
+        "network",
+        "pulseaudio",
+        "battery",
+        "custom/swaync",
+        "clock"
+    ],
+    "modules-right": [],
+
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+        "warp-on-scroll": false,
+        "disable-scroll-wraparound": true,
+        "all-outputs": false,
+        "active-only": false,
+        "sort-by-number": true,
+        "format": "{windows}",
+        "format-window-separator": "",
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "window-rewrite-default": "",
+        "window-rewrite": {
+            "class<kitty>": "",
+            "class<Alacritty>": "",
+            "class<foot>": "",
+            "class<org\\.wezfurlong\\.wezterm>": "",
+            "class<code-oss>": "",
+            "class<Code>": "",
+            "class<firefox>": "",
+            "class<Google-chrome>": "",
+            "class<chromium>": "",
+            "class<brave-browser>": "",
+            "class<Thunar>": "",
+            "class<org\\.gnome\\.Nautilus>": "",
+            "class<spotify>": "",
+            "class<discord>": "",
+            "class<TelegramDesktop>": ""
+        },
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": "",
+            "empty": ""
+        }
+    },
+
+    "clock": {
+        "format": "  {:%H:%M}",
+        "format-alt": "  {:%a, %d %b %Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "on-click": "gsimplecal",
+        "on-click-right": "notify-send 'Date' \"$(date '+%A, %d %B %Y')\""
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "on-click": "notify-send 'Battery' \"$(upower -i $(upower -e | grep BAT | head -n 1) | grep -E 'percentage|state|time to empty|time to full' | tr '\n' ' ')\""
+    },
+
+    "network": {
+        "format-wifi": "{essid} ",
+        "format-ethernet": "Ethernet ",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "Disconnected ⚠",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "on-click": "nm-connection-editor",
+        "on-click-right": "notify-send 'Network' \"$(ip -brief addr | sed 's/  */ /g')\""
+    },
+
+    "pulseaudio": {
+        "scroll-step": 2,
+        "format": "{volume}% {icon}",
+        "format-muted": " Mute",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+
+    "custom/swaync": {
+        "return-type": "json",
+        "exec": "bash -c 'swaync-client -swb | while IFS= read -r line; do count=$(printf \"%s\" \"$line\" | sed -n \"s/.*\\\"text\\\": *\\\"\\([^\\\"]*\\)\\\".*/\\1/p\"); state=$(printf \"%s\" \"$line\" | sed -n \"s/.*\\\"class\\\": *\\\"\\([^\\\"]*\\)\\\".*/\\1/p\"); case \"$state\" in notification) text=\" $count\"; class=\"notification\" ;; none) text=\"\"; class=\"none\" ;; dnd-notification|inhibited-notification) text=\" $count\"; class=\"dnd-notification\" ;; dnd-none|inhibited-none) text=\"\"; class=\"dnd-none\" ;; *) text=\" $count\"; class=\"$state\" ;; esac; printf \"{\\\"text\\\":\\\"%s\\\",\\\"tooltip\\\":\\\"Notifications: %s | State: %s\\\",\\\"class\\\":\\\"%s\\\"}\\n\" \"$text\" \"$count\" \"$state\" \"$class\"; done'",
+        "on-click": "swaync-client -t",
+        "on-click-right": "swaync-client -d",
+        "escape": true
+    }
+}

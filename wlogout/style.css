@@ -1,0 +1,54 @@
+* {
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font";
+}
+
+window {
+  background-color: rgba(40, 44, 52, 0.40);
+}
+
+#outer-box {
+  margin: 20px;
+}
+
+#inner-box {
+  background-color: rgba(40, 44, 52, 0.95);
+  border: 1px solid #3a3f4b;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+button {
+  min-width: 120px;
+  min-height: 110px;
+  margin: 8px;
+  border-radius: 14px;
+  border: 1px solid #3a3f4b;
+  background-color: #282c34;
+  transition: all 0.2s ease;
+}
+
+button label {
+  font-size: 34px;
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: #21252b;
+  border-color: #61afef;
+}
+
+/* One Dark Accent Colors */
+#lock { color: #61afef; }
+#logout { color: #c678dd; }
+#suspend { color: #e5c07b; }
+#hibernate { color: #56b6c2; }
+#reboot { color: #98c379; }
+#shutdown { color: #e06c75; }
+
+#lock:hover { background-color: rgba(97,175,239,0.15); }
+#logout:hover { background-color: rgba(198,120,221,0.15); }
+#suspend:hover { background-color: rgba(229,192,123,0.15); }
+#hibernate:hover { background-color: rgba(86,182,194,0.15); }
+#reboot:hover { background-color: rgba(152,195,121,0.15); }
+#shutdown:hover { background-color: rgba(224,108,117,0.15); }

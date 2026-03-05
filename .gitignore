@@ -1,0 +1,33 @@
+# OS / editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Common sensitive/runtime files
+**/Cache/
+**/Code Cache/
+**/GPUCache/
+**/DawnGraphiteCache/
+**/DawnWebGPUCache/
+**/Service Worker/
+**/Session Storage/
+**/Local Storage/
+**/WebStorage/
+**/blob_storage/
+**/logs/
+**/*.log
+
+# Browser/app secrets & transient data
+**/Cookies
+**/Cookies-journal
+**/Network Persistent State
+**/TransportSecurity
+**/Trust Tokens*
+**/*token*
+**/*secret*
+**/*key*
+
+# Wayland/XDG runtime leftovers
+**/*.pid
+**/*.lock
