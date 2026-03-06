@@ -32,3 +32,17 @@ ln -sfn ~/dotfiles-ricing/waybar ~/.config/waybar
 ```
 
 > Cek isi sebelum dipakai agar tidak menimpa setup yang tidak diinginkan.
+
+## Restore semua config
+
+Jalankan script berikut dari root repo untuk restore semua config ke versi dotfiles ini:
+
+```bash
+./restore.sh
+```
+
+Cek dulu tanpa mengubah file:
+
+```bash
+./restore.sh --dry-run
+```
